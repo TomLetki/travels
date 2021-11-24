@@ -17,11 +17,16 @@ public class HotelSearch {
        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
        driver.manage().window().maximize();
        driver.get("http://www.kurs-selenium.pl/demo/");
-
+//wybór miasta
       //driver.findElement(By.xpath("//*[@id='s2id_autogen8']/a/span[1]")).click();
       driver.findElement(By.xpath("//span[text()='Search by Hotel or City Name']")).click();
       driver.findElement(By.xpath("//div[@id='select2-drop']//input")).sendKeys("Dubai");
       driver.findElement(By.xpath("//span[@class='select2-match' and text()='Dubai']")).click();
+//data
+       driver.findElement(By.name("checkin")).sendKeys("17/12/2021");
+       driver.findElement(By.name("checkout")).sendKeys("19/12/2021");
+
+
    }
 
 
