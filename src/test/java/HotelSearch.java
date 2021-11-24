@@ -23,8 +23,17 @@ public class HotelSearch {
       driver.findElement(By.xpath("//div[@id='select2-drop']//input")).sendKeys("Dubai");
       driver.findElement(By.xpath("//span[@class='select2-match' and text()='Dubai']")).click();
 //data
-       driver.findElement(By.name("checkin")).sendKeys("17/12/2021");
-       driver.findElement(By.name("checkout")).sendKeys("19/12/2021");
+       //driver.findElement(By.name("checkin")).sendKeys("17/12/2021");
+      // driver.findElement(By.name("checkout")).sendKeys("19/12/2021");
+
+       driver.findElement(By.name("checkin")).click();
+       driver.findElements(By.xpath("//td[@class='day 'and text()='30']"))
+               .stream()
+               .filter(el->el.isDisplayed())
+               .findFirst()
+               .ifPresent(el->el.click());
+
+       // driver.findElement(By.name("checkout")).sendKeys("19/12/2021");
 
 
    }
