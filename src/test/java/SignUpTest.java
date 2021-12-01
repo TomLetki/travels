@@ -29,10 +29,12 @@ public class SignUpTest {
 
        //uzupełnianie danych użytkownika
       String lastname = "Comasz";
+      int randomNumber = (int) (Math.random()*1000);
+      String email = "Tester"+randomNumber+"@testy.pl";
       driver.findElement(By.name("firstname")).sendKeys("Tomasz");
       driver.findElement(By.name("lastname")).sendKeys("Comasz");
       driver.findElement(By.name("phone")).sendKeys("+48555666777");
-      driver.findElement(By.name("email")).sendKeys("Tomasz1@testy.pl");
+      driver.findElement(By.name("email")).sendKeys(email);
       driver.findElement(By.name("password")).sendKeys("Test123");
       driver.findElement(By.name("confirmpassword")).sendKeys("Test123");
       driver.findElement(By.xpath("//button[text()=' Sign Up']")).click();
