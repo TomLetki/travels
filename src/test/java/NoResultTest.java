@@ -38,8 +38,10 @@ public class NoResultTest {
        driver.findElement(By.id("childPlusBtn")).click();
        driver.findElement(By.xpath("//button[text()=' Search']")).click();
 
-     WebElement result = driver.findElement(By.xpath("//h2[@class='text-center']"));
-     Assert.assertTrue(result.isDisplayed());
+//     WebElement result = driver.findElement(By.xpath("//h2[@class='text-center']")); moja opcja
+     WebElement result = driver.findElement(By.xpath("//div[@class='itemscontainer']//h2")); //opcja Bartka
+
+       Assert.assertTrue(result.isDisplayed());
      Assert.assertEquals("No Results Found", result.getText());
    }
 }
