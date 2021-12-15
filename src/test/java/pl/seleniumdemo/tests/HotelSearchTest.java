@@ -1,23 +1,21 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
+package pl.seleniumdemo.tests;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
+import pl.seleniumdemo.tests.BaseTest;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 
-public class HotelSearchTest extends BaseTest{
+public class HotelSearchTest extends BaseTest {
 
  @Test
 
     public void searchHotelTest()  {
-    //wybór miasta
-      //driver.findElement(By.xpath("//*[@id='s2id_autogen8']/a/span[1]")).click();
+
       driver.findElement(By.xpath("//span[text()='Search by Hotel or City Name']")).click();
       driver.findElement(By.xpath("//div[@id='select2-drop']//input")).sendKeys("Dubai");
       driver.findElement(By.xpath("//span[@class='select2-match' and text()='Dubai']")).click();
@@ -64,8 +62,7 @@ public class HotelSearchTest extends BaseTest{
                 .filter(el->el.isDisplayed())
                 .findFirst()
                 .ifPresent(el->el.click());
-        // driver.findElement(By.name("checkout")).sendKeys("19/12/2021");
-        // ilość gości
+
         driver.findElement(By.id("travellersInput")).click();
         driver.findElement(By.id("childPlusBtn")).click();
         driver.findElement(By.xpath("//button[text()=' Search']")).click();
