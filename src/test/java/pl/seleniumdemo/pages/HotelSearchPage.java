@@ -24,7 +24,7 @@ public class HotelSearchPage {
     private WebElement checkoutInput;
 
     @FindBy(id ="travellersInput" )
-    private WebElement travellersInput;
+    private WebElement travelersInput;
 
     @FindBy(id = "adultPlusBtn")
     private WebElement adultPlusBtn;
@@ -48,10 +48,16 @@ public class HotelSearchPage {
         checkinInput.sendKeys(checkin);
         checkoutInput.sendKeys(checkout);
     }
-    public void setTravellers(){
-        travellersInput.click();
-        adultPlusBtn.click();
-        childPlusBtn.click();
+    public void setTravelers(int adultsToAdd, int childToAdd){
+        travelersInput.click();
+        addTraveler(adultPlusBtn, adultsToAdd);
+        addTraveler(childPlusBtn, childToAdd);
+    }
+
+    private void addTraveler(WebElement travelerBtn, int numberOfTravelers){
+        for(int i=0; i<numberOfTravelers; i++){
+            travelerBtn.click();
+        }
     }
     public void performSearch(){
         searchButton.click();

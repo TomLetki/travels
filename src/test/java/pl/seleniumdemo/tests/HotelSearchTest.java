@@ -1,14 +1,10 @@
 package pl.seleniumdemo.tests;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pl.seleniumdemo.pages.HotelSearchPage;
-import pl.seleniumdemo.tests.BaseTest;
-
+import pl.seleniumdemo.pages.ResultsPage;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class HotelSearchTest extends BaseTest {
@@ -20,14 +16,13 @@ public class HotelSearchTest extends BaseTest {
      HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
      hotelSearchPage.setCity("Dubai");
      hotelSearchPage.setDates("22/12/2021", "24/12/2021");
-     hotelSearchPage.setTravellers();
+     hotelSearchPage.setTravelers(1,2);
      hotelSearchPage.performSearch();
 
+     ResultsPage resultsPage = new ResultsPage(driver);
+     List<String> hotelNames = resultsPage.getHotelNames();
 
 
-       List<String> hotelNames = driver.findElements(By.xpath("//h4[contains(@class, 'list_title')]//b")).stream()
-                                                                                .map(el->el.getAttribute("textContent"))
-                                                                                .collect(Collectors.toList());
        System.out.println("Listed items : "+hotelNames.size());
        hotelNames.forEach(el-> System.out.println("* "+el));
 
@@ -40,25 +35,15 @@ public class HotelSearchTest extends BaseTest {
     @Test
     public void searchHotelWithoutNameTest()  {
 
-//data
-        driver.findElement(By.name("checkin")).sendKeys("27/11/2021");
-        // driver.findElement(By.name("checkout")).sendKeys("19/12/2021");
+     HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
+     hotelSearchPage.setDates("24/12/2021", "27/12/2021");
+     hotelSearchPage.setTravelers(0,1);
+     hotelSearchPage.performSearch();
 
-        driver.findElement(By.name("checkout")).click();
-        driver.findElements(By.xpath("//td[@class='day 'and text()='30']"))
-                .stream()
-                .filter(el->el.isDisplayed())
-                .findFirst()
-                .ifPresent(el->el.click());
+     ResultsPage resultsPage = new ResultsPage(driver);
 
-        driver.findElement(By.id("travellersInput")).click();
-        driver.findElement(By.id("childPlusBtn")).click();
-        driver.findElement(By.xpath("//button[text()=' Search']")).click();
-
-        WebElement result = driver.findElement(By.xpath("//div[@class='itemscontainer']//h2")); //opcja Bartka
-
-        Assert.assertTrue(result.isDisplayed());
-        Assert.assertEquals("No Results Found", result.getText());
+        Assert.assertTrue(resultsPage.resultHeading.isDisplayed());
+        Assert.assertEquals("No Results Found", resultsPage.getHeadingText());
 
     }
 
