@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.testng.annotations.Test;
 import pl.seleniumdemo.pages.HotelSearchPage;
 import pl.seleniumdemo.pages.ResultsPage;
+
 import java.util.List;
 
 
@@ -14,7 +15,7 @@ public class HotelSearchTest extends BaseTest {
     public void searchHotelTest()  {
 
      HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-     hotelSearchPage.setCity("Dubai");
+     hotelSearchPage.setCity("London");
      hotelSearchPage.setDates("22/12/2021", "24/12/2021");
      hotelSearchPage.setTravelers(1,2);
      hotelSearchPage.performSearch();
