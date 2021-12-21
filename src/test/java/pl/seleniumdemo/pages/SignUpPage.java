@@ -5,7 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class SigUpPage {
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class SignUpPage {
     @FindBy(name = "firstname")
     private WebElement firstNameInput;
 
@@ -27,7 +30,10 @@ public class SigUpPage {
     @FindBy(xpath = "//button[text()=' Sign Up']")
     private WebElement signUpButton;
 
-    public SigUpPage(WebDriver driver){
+    @FindBy(xpath = "//div[@class='alert alert-danger']/p")
+    private List<WebElement> errors;
+
+    public SignUpPage(WebDriver driver){
         PageFactory.initElements(driver, this);
     }
 
@@ -49,10 +55,25 @@ public class SigUpPage {
     public void setConfirmPassword(String confirmPassword) {
         confirmPasswordInput.sendKeys(confirmPassword);
     }
+
     public void signup () {
         signUpButton.click();
     }
-    }
+    public List<String> getErrors(){
+    return errors.stream().map(WebElement::getText).collect(Collectors.toList());
 
     }
+    public void fillSignUpForm(String firstName, String lastName, String phone, String email, String password){
+        firstNameInput.sendKeys(firstName);
+        lastNameInput.sendKeys(lastName);
+        phoneInput.sendKeys(phone);
+        emailInput.sendKeys(email);
+        passwordInput.sendKeys(password);
+        confirmPasswordInput.sendKeys(password);
+        signUpButton.click();
+
+    }
+}
+
+
 

@@ -21,7 +21,8 @@ public class BaseTest {
                 driver.get("http://www.kurs-selenium.pl/demo/");
     }
     @AfterMethod
-        public void tearDown(){
-                driver.quit();
+        public void tearDown() throws InterruptedException {
+        Thread.sleep(500);
+        driver.quit();
     }
 }
