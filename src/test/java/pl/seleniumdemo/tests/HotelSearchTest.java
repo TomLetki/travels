@@ -18,7 +18,7 @@ public class HotelSearchTest extends BaseTest {
      List<String> hotelNames = hotelSearchPage.setCity("London")
              .setDates("22/12/2021", "24/12/2021")
              .setTravelers(1,2)
-             .performSearch().getHotelNames()
+             .performSearch().getHotelNames();
 
      ResultsPage resultsPage = new ResultsPage(driver);
     // List<String> hotelNames = resultsPage.getHotelNames();
@@ -36,12 +36,8 @@ public class HotelSearchTest extends BaseTest {
     @Test
     public void searchHotelWithoutNameTest()  {
 
-     HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-     hotelSearchPage.setDates("24/12/2021", "27/12/2021");
-     hotelSearchPage.setTravelers(0,1);
-     hotelSearchPage.performSearch();
-
-     ResultsPage resultsPage = new ResultsPage(driver);
+        ResultsPage resultsPage = new HotelSearchPage(driver).setDates("24/12/2021", "27/12/2021")
+                    .setTravelers(0,1).performSearch();
 
         Assert.assertTrue(resultsPage.resultHeading.isDisplayed());
         Assert.assertEquals("No Results Found", resultsPage.getHeadingText());
