@@ -10,34 +10,36 @@ import java.util.List;
 
 public class HotelSearchTest extends BaseTest {
 
- @Test
-
-    public void searchHotelTest()  {
-
-     HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-     List<String> hotelNames = hotelSearchPage.setCity("London")
-             .setDates("22/12/2021", "24/12/2021")
-             .setTravelers(1,2)
-             .performSearch().getHotelNames();
-
-     ResultsPage resultsPage = new ResultsPage(driver);
-    // List<String> hotelNames = resultsPage.getHotelNames();
-
-
-       System.out.println("Listed items : "+hotelNames.size());
-       hotelNames.forEach(el-> System.out.println("* "+el));
-
-       Assert.assertEquals("Jumeirah Beach Hotel", hotelNames.get(0));
-       Assert.assertEquals("Oasis Beach Tower", hotelNames.get(1));
-       Assert.assertEquals("Rose Rayhaan Rotana", hotelNames.get(2));
-       Assert.assertEquals("Hyatt Regency Perth", hotelNames.get(3));
-
-          }
     @Test
-    public void searchHotelWithoutNameTest()  {
+
+    public void searchHotelTest() {
+
+        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
+        List<String> hotelNames = hotelSearchPage.setCity("Dubai")
+                .setDates("22/12/2021", "24/12/2021")
+                .setTravelers(1, 2)
+                .performSearch().getHotelNames();
+
+        ResultsPage resultsPage = new ResultsPage(driver);
+        // List<String> hotelNames = resultsPage.getHotelNames();
+
+
+        System.out.println("Listed items : " + hotelNames.size());
+        hotelNames.forEach(el -> System.out.println("* " + el));
+
+
+        Assert.assertEquals("Jumeirah Beach Hotel", hotelNames.get(0));
+        Assert.assertEquals("Oasis Beach Tower", hotelNames.get(1));
+        Assert.assertEquals("Rose Rayhaan Rotana", hotelNames.get(2));
+        Assert.assertEquals("Hyatt Regency Perth", hotelNames.get(3));
+
+    }
+
+    @Test
+    public void searchHotelWithoutNameTest() {
 
         ResultsPage resultsPage = new HotelSearchPage(driver).setDates("24/12/2021", "27/12/2021")
-                    .setTravelers(0,1).performSearch();
+                .setTravelers(0, 1).performSearch();
 
         Assert.assertTrue(resultsPage.resultHeading.isDisplayed());
         Assert.assertEquals("No Results Found", resultsPage.getHeadingText());
