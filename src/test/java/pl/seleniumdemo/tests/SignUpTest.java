@@ -17,57 +17,36 @@ import java.util.stream.Collectors;
 
 public class SignUpTest extends BaseTest {
 
-  @Test
+    @Test
     public void userSignUpTest() {
 
 
-      HotelSearchPage hotelSearchPage = new  HotelSearchPage(driver);
-      hotelSearchPage.openSignUpForm();
-      String lastname = "Comasz";
-      int randomNumber = (int) (Math.random()*1000);
-      String email = "Tester"+randomNumber+"@testy.pl";
+        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
+        hotelSearchPage.openSignUpForm();
+        String lastname = "Comasz";
+        int randomNumber = (int) (Math.random() * 1000);
+        String email = "Tester" + randomNumber + "@testy.pl";
 
-      SignUpPage signUpPage = new SignUpPage(driver);
-      signUpPage.setFirstName("Tomasz");
-      signUpPage.setLastName(lastname);
-      signUpPage.setPhone("123123123");
-      signUpPage.setEmail(email);
-      signUpPage.setPassword("Test123");
-      signUpPage.setConfirmPassword("Test123");
-      signUpPage.signup();
+        SignUpPage signUpPage = new SignUpPage(driver);
+        signUpPage.setFirstName("Tomasz");
+        signUpPage.setLastName(lastname);
+        signUpPage.setPhone("123123123");
+        signUpPage.setEmail(email);
+        signUpPage.setPassword("Test123");
+        signUpPage.setConfirmPassword("Test123");
+        signUpPage.signup();
 
-      LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
-      Assert.assertTrue(loggedUserPage.getHeadingText().contains(lastname));
-      Assert.assertEquals(loggedUserPage.getHeadingText(), "Hi, Tomasz Comasz");
+        LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
+        Assert.assertTrue(loggedUserPage.getHeadingText().contains(lastname));
+        Assert.assertEquals(loggedUserPage.getHeadingText(), "Hi, Tomasz Comasz");
 
 
-   }
-   @Test
-   public void userSignUpTest2() {
-       HotelSearchPage hotelSearchPage = new  HotelSearchPage(driver);
-       hotelSearchPage.openSignUpForm();
-       int randomNumber = (int) (Math.random()*1000);
-       String email = "Tester"+randomNumber+"@testy.pl";
+    }
 
-       User user = new User();
-       user.setFirstName("Tomek");
-       user.setLastName("Testowy");
-       user.setPhone("123123123");
-       user.setEmail(email);
-       user.setPassword("Test123");
-
-       SignUpPage signUpPage = new SignUpPage(driver);
-      // signUpPage.fillSignUpForm("Tomasz", lastname, "123123123", email, "Test123");
-       signUpPage.fillSignUpForm(user);
-
-       LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
-       Assert.assertTrue(loggedUserPage.getHeadingText().contains(user.getLastName()));
-       Assert.assertEquals(loggedUserPage.getHeadingText(), "Hi, Tomasz Comasz");
-   }
     @Test
-    public void userSignUpEmptyTest()  {
+    public void userSignUpEmptyTest() {
 
-        HotelSearchPage hotelSearchPage = new  HotelSearchPage(driver);
+        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
         hotelSearchPage.openSignUpForm();
         SignUpPage signUpPage = new SignUpPage(driver);
         signUpPage.signup();
@@ -82,9 +61,10 @@ public class SignUpTest extends BaseTest {
         softAssert.assertAll();
 
     }
+
     @Test
-    public void userSignUpWrongEmailTest()  {
-        HotelSearchPage hotelSearchPage = new  HotelSearchPage(driver);
+    public void userSignUpWrongEmailTest() {
+        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
         hotelSearchPage.openSignUpForm();
 
         SignUpPage signUpPage = new SignUpPage(driver);

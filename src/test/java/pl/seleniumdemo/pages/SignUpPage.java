@@ -34,56 +34,43 @@ public class SignUpPage {
     @FindBy(xpath = "//div[@class='alert alert-danger']/p")
     private List<WebElement> errors;
 
-    public SignUpPage(WebDriver driver){
+    public SignUpPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
 
-    public void setFirstName(String firstName){
+    public void setFirstName(String firstName) {
         firstNameInput.sendKeys(firstName);
     }
+
     public void setLastName(String lastName) {
         lastNameInput.sendKeys(lastName);
     }
+
     public void setPhone(String phone) {
         phoneInput.sendKeys(phone);
     }
+
     public void setEmail(String email) {
         emailInput.sendKeys(email);
     }
+
     public void setPassword(String password) {
         passwordInput.sendKeys(password);
     }
+
     public void setConfirmPassword(String confirmPassword) {
         confirmPasswordInput.sendKeys(confirmPassword);
     }
 
-    public void signup () {
+    public void signup() {
         signUpButton.click();
     }
-    public List<String> getErrors(){
-    return errors.stream().map(WebElement::getText).collect(Collectors.toList());
+
+    public List<String> getErrors() {
+        return errors.stream().map(WebElement::getText).collect(Collectors.toList());
 
     }
-    public void fillSignUpForm(String firstName, String lastName, String phone, String email, String password){
-        firstNameInput.sendKeys(firstName);
-        lastNameInput.sendKeys(lastName);
-        phoneInput.sendKeys(phone);
-        emailInput.sendKeys(email);
-        passwordInput.sendKeys(password);
-        confirmPasswordInput.sendKeys(password);
-        signUpButton.click();
 
-    }
-    public void fillSignUpForm(User user){
-        firstNameInput.sendKeys(user.getFirstName());
-        lastNameInput.sendKeys(user.getLastName());
-        phoneInput.sendKeys(user.getPhone());
-        emailInput.sendKeys(user.getEmail());
-        passwordInput.sendKeys(user.getPassword());
-        confirmPasswordInput.sendKeys(user.getPassword());
-        signUpButton.click();
-
-    }
 }
 
 
