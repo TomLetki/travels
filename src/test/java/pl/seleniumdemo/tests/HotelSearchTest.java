@@ -15,13 +15,13 @@ public class HotelSearchTest extends BaseTest {
     public void searchHotelTest()  {
 
      HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-     hotelSearchPage.setCity("London");
-     hotelSearchPage.setDates("22/12/2021", "24/12/2021");
-     hotelSearchPage.setTravelers(1,2);
-     hotelSearchPage.performSearch();
+     List<String> hotelNames = hotelSearchPage.setCity("London")
+             .setDates("22/12/2021", "24/12/2021")
+             .setTravelers(1,2)
+             .performSearch().getHotelNames()
 
      ResultsPage resultsPage = new ResultsPage(driver);
-     List<String> hotelNames = resultsPage.getHotelNames();
+    // List<String> hotelNames = resultsPage.getHotelNames();
 
 
        System.out.println("Listed items : "+hotelNames.size());
