@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pl.seleniumdemo.utils.SeleniumHelper;
 
 import java.util.List;
 
@@ -52,16 +53,23 @@ public class HotelSearchPage {
 
     public void setCity(String cityName){
         logger.info("Set City "+cityName);
-        System.out.println("Setting city : " +cityName);
+        logger.info("Setting city : " +cityName);
         searchHotelSpan.click();
         searchHotelInput.sendKeys(cityName);
         String xpath = String.format("//span[@class='select2-match' and text()='%s']",cityName);
+        SeleniumHelper.waitForElementToExist(driver, By.xpath(xpath));
         driver.findElement(By.xpath(xpath)).click();
         logger.info("setting city done");
 
     }
     public void setDates(String checkin, String checkout ){
         logger.info("Setting checkin date : " +checkin);
+        /*
+        logger.warn(); inne poziomy logów.
+        logger.fatal();
+        logger.error();
+        logger.debug();
+        */
         checkinInput.sendKeys(checkin);
         logger.info("Setting checkout date : " +checkout);
         checkoutInput.sendKeys(checkout);
@@ -69,7 +77,7 @@ public class HotelSearchPage {
     }
     public void setTravelers(int adultsToAdd, int childToAdd){
         travelersInput.click();
-        logger.info("Adding adults "+adultsToAdd + "Adding kids "+childToAdd);
+        logger.info("Adding adults "+adultsToAdd + ", Adding kids "+childToAdd);
         addTraveler(adultPlusBtn, adultsToAdd);
         addTraveler(childPlusBtn, childToAdd);
         logger.info("Adding travellers done");
@@ -77,6 +85,7 @@ public class HotelSearchPage {
 
     private void addTraveler(WebElement travelerBtn, int numberOfTravelers){
         for(int i=0; i<numberOfTravelers; i++){
+           SeleniumHelper.waitForElementToBeVisible(driver,travelerBtn);
             travelerBtn.click();
         }
     }
